@@ -28,7 +28,7 @@ fn print_position_system(query: Query<&Position>) {
     }
 }
 fn hello_world() {
-    println!("hello world!");
+    println!("hello  sworld!");
 }
 
 // STARTUP SYSTEMS

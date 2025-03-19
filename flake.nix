@@ -33,6 +33,7 @@
             wayland
             glibc.dev
             glib.dev
+            mold
           ];
 
           shellHook = ''
