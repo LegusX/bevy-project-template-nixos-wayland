@@ -7,7 +7,7 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, rust-overlay, flake-utils, ... }:
+  outputs = { nixpkgs, rust-overlay, flake-utils, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         overlays = [ (import rust-overlay) ];
@@ -38,6 +38,7 @@
 
           shellHook = ''
             export PATH=$PATH:''${CARGO_HOME:-~/.cargo}/bin
+            # export VK_LAYER_PATH=${pkgs.vulkan-validation-layers}/share/vulkan/explicit_layer.d
             export LD_LIBRARY_PATH=${
               pkgs.lib.makeLibraryPath [
                 pkgs.vulkan-loader
@@ -45,6 +46,8 @@
                 pkgs.wayland
                 pkgs.alsa-lib
                 pkgs.udev
+                pkgs.libxkbcommon
+                # pkgs.vulkan-validation-layers
               ]
             }:$LD_LIBRARY_PATH
             export LIBCLANG_PATH="${pkgs.llvmPackages_latest.libclang.lib}/lib"
